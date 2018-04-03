@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  mysql:
+    image: 'mysql:5.7'
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: finance_db
+      MYSQL_USER: finance_user
+      MYSQL_PASSWORD: finance_pass
+    volumes:
+      - 'dbdata:/var/lib/mysql'
+
+  app:
+    build: .
+    depends_on:
+      - 'mysql'
+    ports:
+      - '3000:3000'
+    volumes:
+      - '.:/app'
+      - finance_gems:/gems
+    env_file:
+      - '.env'
+
+volumes:
+  dbdata:
+  finance_gems:
+    external: true
+
