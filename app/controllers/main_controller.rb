@@ -7,7 +7,7 @@ class MainController < ApplicationController
 
       if starts_at > ends_at
         starts_at, ends_at = ends_at, starts_at
-      elsif starts_at = ends_at
+      elsif starts_at == ends_at
         redirect_to root_path and return
       end
 
