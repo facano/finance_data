@@ -1,34 +1,44 @@
-<div class="container">
-  
+<div class="container mt-md-5">
+
   <div class="row">
     <div class="col-md-12 text-center">
-      <h3>Consulta entre el <%=params[:date_range][:starts_at] %> y el <%=params[:date_range][:ends_at] %></h3>
+      <h4>Consulta entre el <%= params[:date_range][:starts_at] %> y el <%= params[:date_range][:ends_at] %></h4>
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-md-12">
+  <div class="row my-md-5 card">
+    <div class="col-md-12 card-body">
       <h4>UF</h4>
       <%= area_chart @ufs, thousands: ".", decimal: ",", legend: "UF" %>
       <% min, max, avg = data_statistic(@ufs) %>
-      <div class="col-md-12 center">
-        Minimo: <%=  number_with_delimiter(min, delimiter: ".", separator: "," )  %> |
-        Max:  <%=  number_with_delimiter(max, delimiter: ".", separator: "," ) %> |
+    </div>
+    <div class="col-md-12 text-center">
+      <div class="card-body">
+        Mínimo: <%=  number_with_delimiter(min, delimiter: ".", separator: "," )  %> |
+        Máximo:  <%=  number_with_delimiter(max, delimiter: ".", separator: "," ) %> |
         Media: <%=  number_with_delimiter('%.2f' % avg, delimiter: ".", separator: ",", precision: 2 ) %>
       </div>
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-md-12">
+  <div class="row my-md-5 card">
+    <div class="col-md-12 card-body">
       <h4> Dolares</h4>
       <%= area_chart @dolares, thousands: ".", decimal: ",", legend: "Dolares" %>
       <% min, max, avg = data_statistic(@dolares) %>
-      <div class="col-md-12 center">
-        Minimo: <%=  number_with_delimiter(min, delimiter: ".", separator: "," )  %> |
-        Max:  <%=  number_with_delimiter(max, delimiter: ".", separator: "," ) %> |
+    </div>
+    <div class="col-md-12 text-center">
+      <div class="card-body">
+        Mínimo: <%=  number_with_delimiter(min, delimiter: ".", separator: "," )  %> |
+        Máximo:  <%=  number_with_delimiter(max, delimiter: ".", separator: "," ) %> |
         Media: <%=  number_with_delimiter('%.2f' % avg, delimiter: ".", separator: ",", precision: 2 ) %>
       </div>
     </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12 text-center">
+    <%= link_to t(:back), root_path, class: "btn btn-success" %>
   </div>
 </div>
