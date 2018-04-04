@@ -43,3 +43,10 @@ y añade la API Key para consumir la API de la SBIF en la variable `SBIF_KEY`
 ```
 docker-compose up
 ```
+
+### TODO
+* TMC
+* Refactor Vista y Controllers
+* Estilos
+* Persistencia de data, para evitar consultas constantes a API
+* Testing
