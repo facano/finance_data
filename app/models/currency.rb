@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 class Currency < ApplicationRecord
-  enum currency_type: [:dolar, :uf]
+  enum currency_type: %i[dolar uf]
   default_scope -> { order(date: :asc) }
 
   class << self
-    def between date1, date2, currency, formated = false
+    def between(date1, date2, currency, formated = false)
       case currency
       when :dolar
         data = Integration::SBIF::UF.between(date1, date2)
@@ -17,10 +19,10 @@ class Currency < ApplicationRecord
       end
     end
 
-    def set_until date, currency
+    def set_until(date, currency)
       until_date = date
-      last_currency = self.send(currency).last
-      if last_currency 
+      last_currency = send(currency).last
+      if last_currency
         if last_currency.date < date
           # Fill between dates
           case currency
@@ -32,7 +34,7 @@ class Currency < ApplicationRecord
           set_data(results, currency)
           return results
         end
-      else #Empty db
+      else # Empty db
         case currency
         when :dolar
           results =  Integration::SBIF::Dolar.before_month(date)
@@ -48,18 +50,15 @@ class Currency < ApplicationRecord
 
     def set_data(results, currency)
       results.each do |result|
-        unless self.send(currency).find_by(date: result["Fecha"])
-          Currency.create({
-            currency_type: currency,
-            date: result["Fecha"],
-            clp_value: result["Valor"].gsub(".","").gsub(",", ".").to_f
-          })
-        end
+        next if send(currency).find_by(date: result['Fecha'])
+        Currency.create(currency_type: currency,
+                        date: result['Fecha'],
+                        clp_value: result['Valor'].delete('.').tr(',', '.').to_f)
       end
     end
 
     def format_data(data)
-       Hash[*data.map{ |data| [data["Fecha"], data["Valor"].gsub(".", "").gsub(",", ".").to_f] }.flatten]
+      Hash[*data.map { |data| [data['Fecha'], data['Valor'].delete('.').tr(',', '.').to_f] }.flatten]
     end
   end
 end

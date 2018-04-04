@@ -1,5 +1,6 @@
-class MainController < ApplicationController
+# frozen_string_literal: true
 
+class MainController < ApplicationController
   def reports
     if params[:date_range] && params[:date_range][:starts_at] && params[:date_range][:ends_at]
       starts_at = params[:date_range][:starts_at].to_time
@@ -8,7 +9,7 @@ class MainController < ApplicationController
       if starts_at > ends_at
         starts_at, ends_at = ends_at, starts_at
       elsif starts_at == ends_at
-        redirect_to root_path and return
+        redirect_to(root_path) && return
       end
 
       @ufs = Currency.between(starts_at, ends_at, :uf, true)
@@ -16,8 +17,7 @@ class MainController < ApplicationController
       @tmcs = TMC.between(starts_at, ends_at, true)
 
     else
-      redirect_to root_path and return
+      redirect_to(root_path) && return
     end
   end
-
 end

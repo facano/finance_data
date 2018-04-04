@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateTmcs < ActiveRecord::Migration[5.1]
   def change
     create_table :tmcs do |t|
