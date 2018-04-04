@@ -75,3 +75,6 @@ gem 'rest-client'
 gem "chartkick"
 
 gem 'groupdate'
+
+gem 'jquery-rails'
+gem 'bootstrap-datepicker-rails'

@@ -1,2 +1,8 @@
-<h1>Main#home</h1>
-<p>Find me in app/views/main/home.html.erb</p>
+<div class="row">
+	<h1>Seleccion un rango de fechas para realizar la consulta</h1>
+	<%= form_for :date_range, url: draw_report_path, method: :get do |form| %>
+	  <%= form.text_field :starts_at, class: "datepicker" %>
+	  <%= form.text_field :ends_at, class: "datepicker" %>
+	  <%= form.submit  %>
+	<% end %>
+</div>
