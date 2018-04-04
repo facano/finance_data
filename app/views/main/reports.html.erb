@@ -1,69 +1,66 @@
-<div class="container mt-md-5">
+<div class="row">
+  <div class="col-md-12 text-center">
+    <h4>Consulta entre el <%= params[:date_range][:starts_at] %> y el <%= params[:date_range][:ends_at] %></h4>
+  </div>
+</div>
 
-  <div class="row">
-    <div class="col-md-12 text-center">
-      <h4>Consulta entre el <%= params[:date_range][:starts_at] %> y el <%= params[:date_range][:ends_at] %></h4>
+<div class="row my-md-5 card">
+  <div class="col-md-12 card-body">
+    <h4>UF</h4>
+    <%= area_chart @ufs, thousands: ".", decimal: ",", legend: "UF" %>
+    <% min, max, avg = data_statistic(@ufs) %>
+  </div>
+  <div class="col-md-12 text-center">
+    <div class="card-body">
+      Mínimo: <%=  number_with_delimiter(min, delimiter: ".", separator: "," )  %> |
+      Máximo:  <%=  number_with_delimiter(max, delimiter: ".", separator: "," ) %> |
+      Media: <%=  number_with_delimiter('%.2f' % avg, delimiter: ".", separator: ",", precision: 2 ) %>
     </div>
   </div>
+</div>
 
-  <div class="row my-md-5 card">
-    <div class="col-md-12 card-body">
-      <h4>UF</h4>
-      <%= area_chart @ufs, thousands: ".", decimal: ",", legend: "UF" %>
-      <% min, max, avg = data_statistic(@ufs) %>
-    </div>
-    <div class="col-md-12 text-center">
-      <div class="card-body">
-        Mínimo: <%=  number_with_delimiter(min, delimiter: ".", separator: "," )  %> |
-        Máximo:  <%=  number_with_delimiter(max, delimiter: ".", separator: "," ) %> |
-        Media: <%=  number_with_delimiter('%.2f' % avg, delimiter: ".", separator: ",", precision: 2 ) %>
-      </div>
+<div class="row my-md-5 card">
+  <div class="col-md-12 card-body">
+    <h4> Dolares</h4>
+    <%= area_chart @dolares, thousands: ".", decimal: ",", legend: "Dolares" %>
+    <% min, max, avg = data_statistic(@dolares) %>
+  </div>
+  <div class="col-md-12 text-center">
+    <div class="card-body">
+      Mínimo: <%=  number_with_delimiter(min, delimiter: ".", separator: "," )  %> |
+      Máximo:  <%=  number_with_delimiter(max, delimiter: ".", separator: "," ) %> |
+      Media: <%=  number_with_delimiter('%.2f' % avg, delimiter: ".", separator: ",", precision: 2 ) %>
     </div>
   </div>
+</div>
 
-  <div class="row my-md-5 card">
-    <div class="col-md-12 card-body">
-      <h4> Dolares</h4>
-      <%= area_chart @dolares, thousands: ".", decimal: ",", legend: "Dolares" %>
-      <% min, max, avg = data_statistic(@dolares) %>
-    </div>
-    <div class="col-md-12 text-center">
-      <div class="card-body">
-        Mínimo: <%=  number_with_delimiter(min, delimiter: ".", separator: "," )  %> |
-        Máximo:  <%=  number_with_delimiter(max, delimiter: ".", separator: "," ) %> |
-        Media: <%=  number_with_delimiter('%.2f' % avg, delimiter: ".", separator: ",", precision: 2 ) %>
-      </div>
-    </div>
-  </div>
-
-  <div class="row my-md-5 card">
-    <div class="col-md-12 card-body">
-      <h4> TMCs</h4>
-      <%= line_chart @tmcs, thousands: ".", decimal: ",", legend: "TMCs" %>
-      <% stats = tmc_stats(@tmcs) %>
-      <div class="col-md-12 my-md-5 card">
-        <div class="text-left"></div>
-        <strong>Tasa Máxima para cada tipo de préstamo en el periodo:</strong>
-        <ul class="list-group">
-          <% stats.each do |tmc_info| %>
-            <li class="list-group-item">
-              <div class="row">
-                <div class="col-md-11">
-                <small><%= tmc_info[:name] %></small>:
-                </div>
-                <div class="col-md-1">
-                 <%= tmc_info[:max] %>%
-                </div>
+<div class="row my-md-5 card">
+  <div class="col-md-12 card-body">
+    <h4> TMCs</h4>
+    <%= line_chart @tmcs, thousands: ".", decimal: ",", legend: "TMCs" %>
+    <% stats = tmc_stats(@tmcs) %>
+    <div class="col-md-12 my-md-5 card">
+      <div class="text-left"></div>
+      <strong>Tasa Máxima para cada tipo de préstamo en el periodo:</strong>
+      <ul class="list-group">
+        <% stats.each do |tmc_info| %>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-11">
+              <small><%= tmc_info[:name] %></small>:
               </div>
-            </li>
-          <% end %>
-        </ul>
-      </div>
-
+              <div class="col-md-1">
+               <%= tmc_info[:max] %>%
+              </div>
+            </div>
+          </li>
+        <% end %>
+      </ul>
     </div>
-    <div class="col-md-12 text-center">
 
-    </div>
+  </div>
+  <div class="col-md-12 text-center">
+
   </div>
 </div>
 

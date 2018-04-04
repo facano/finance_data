@@ -48,4 +48,5 @@ docker-compose up
 * Detalles en gráficos (leyendas, estilos, etc)
 * Persistencia de data, para evitar consultas constantes a API
 * Autenticación con User y Pass (para evitar usos no autorizados de la API)
+* Mejorar usabilidad
 * Testing
