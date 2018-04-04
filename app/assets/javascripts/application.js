@@ -12,6 +12,8 @@
 //
 //= require jquery
 //= require rails-ujs
+//= require popper
+//= require bootstrap-sprockets
 //= require turbolinks
 //= require bootstrap-datepicker
 //= require Chart.bundle

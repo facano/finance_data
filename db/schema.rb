@@ -10,12 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180404023651) do
+ActiveRecord::Schema.define(version: 20180404130510) do
 
   create_table "currencies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.date "date"
     t.float "clp_value", limit: 24
     t.integer "currency_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tmcs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.integer "tmc_type"
+    t.date "date"
+    t.float "clp_value", limit: 24
+    t.string "title"
+    t.string "subtitle"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

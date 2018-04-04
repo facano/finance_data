@@ -1,31 +1,34 @@
-<div class="row">
-  <h1>Consulta entre el <%=params[:date_range][:starts_at] %> y el <%=params[:date_range][:ends_at] %></h1>
-</div>
-<div class="row">
-  <h2>UF</h2>
-  <%= area_chart @ufs, thousands: ".", decimal: ",", legend: "UF" %>
-  <% min, max, avg = data_statistic(@ufs) %>
-  <p>
-    Minimo: <%=  number_with_delimiter(min, delimiter: ".", separator: "," )  %>
-  </p>
-  <p>
-    Max:  <%=  number_with_delimiter(max, delimiter: ".", separator: "," ) %>
-  </p>
-  <p>
-   Media: <%=  number_with_delimiter(avg, delimiter: ".", separator: ",", precision: 2 ) %>
-  </p>
-</div>
-<div class="row">
-  <h2> Dolares</h2>
-  <%= area_chart @dolares, thousands: ".", decimal: ",", legend: "Dolares" %>
-  <% min, max, avg = data_statistic(@dolares) %>
-  <p>
-    Minimo: <%=  number_with_delimiter(min, delimiter: ".", separator: "," )  %>
-  </p>
-  <p>
-    Max:  <%=  number_with_delimiter(max, delimiter: ".", separator: "," ) %>
-  </p>
-  <p>
-   Media: <%=  number_with_delimiter(avg, delimiter: ".", separator: "," , precision: 2) %>
-  </p>
+<div class="container">
+  
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h3>Consulta entre el <%=params[:date_range][:starts_at] %> y el <%=params[:date_range][:ends_at] %></h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <h4>UF</h4>
+      <%= area_chart @ufs, thousands: ".", decimal: ",", legend: "UF" %>
+      <% min, max, avg = data_statistic(@ufs) %>
+      <div class="col-md-12 center">
+        Minimo: <%=  number_with_delimiter(min, delimiter: ".", separator: "," )  %> |
+        Max:  <%=  number_with_delimiter(max, delimiter: ".", separator: "," ) %> |
+        Media: <%=  number_with_delimiter('%.2f' % avg, delimiter: ".", separator: ",", precision: 2 ) %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <h4> Dolares</h4>
+      <%= area_chart @dolares, thousands: ".", decimal: ",", legend: "Dolares" %>
+      <% min, max, avg = data_statistic(@dolares) %>
+      <div class="col-md-12 center">
+        Minimo: <%=  number_with_delimiter(min, delimiter: ".", separator: "," )  %> |
+        Max:  <%=  number_with_delimiter(max, delimiter: ".", separator: "," ) %> |
+        Media: <%=  number_with_delimiter('%.2f' % avg, delimiter: ".", separator: ",", precision: 2 ) %>
+      </div>
+    </div>
+  </div>
 </div>

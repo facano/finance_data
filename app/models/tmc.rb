@@ -1,0 +1,2 @@
+class Tmc < ApplicationRecord
+end
