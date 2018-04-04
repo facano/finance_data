@@ -75,4 +75,3 @@ gem 'rest-client'
 gem "chartkick"
 
 gem 'groupdate'
-
