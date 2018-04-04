@@ -1,13 +1,13 @@
 <div class="row">
   <div class="col-md-12 text-center">
-    <h4>Consulta entre el <%= params[:date_range][:starts_at] %> y el <%= params[:date_range][:ends_at] %></h4>
+    <h4>Consulta entre el <%= @starts_at.strftime("%d/%m/%Y") %> y el <%= @ends_at.strftime("%d/%m/%Y") %></h4>
   </div>
 </div>
 
 <div class="row my-md-5 card">
   <div class="col-md-12 card-body">
     <h4>UF</h4>
-    <%= area_chart @ufs, thousands: ".", decimal: ",", legend: "UF" %>
+    <%= area_chart @ufs, thousands: ".", decimal: ",", legend: "UF", points: @points, ytitle: "CLP" %>
     <% min, max, avg = data_statistic(@ufs) %>
   </div>
   <div class="col-md-12 text-center">
@@ -21,8 +21,8 @@
 
 <div class="row my-md-5 card">
   <div class="col-md-12 card-body">
-    <h4> Dolares</h4>
-    <%= area_chart @dolares, thousands: ".", decimal: ",", legend: "Dolares" %>
+    <h4> Dolar</h4>
+    <%= area_chart @dolares, thousands: ".", decimal: ",", legend: "Dolares", points: @points, ytitle: "CLP" %>
     <% min, max, avg = data_statistic(@dolares) %>
   </div>
   <div class="col-md-12 text-center">
@@ -37,11 +37,11 @@
 <div class="row my-md-5 card">
   <div class="col-md-12 card-body">
     <h4> TMCs</h4>
-    <%= line_chart @tmcs, thousands: ".", decimal: ",", legend: "TMCs" %>
+    <%= line_chart @tmcs, thousands: ".", decimal: ",", legend: "TMCs", ytitle: "%" %>
     <% stats = tmc_stats(@tmcs) %>
     <div class="col-md-12 my-md-5 card">
       <div class="text-left"></div>
-      <strong>Tasa Máxima para cada tipo de préstamo en el periodo:</strong>
+      <strong>Tasa Máxima para cada tipo de préstamo en este período:</strong>
       <ul class="list-group">
         <% stats.each do |tmc_info| %>
           <li class="list-group-item">
