@@ -36,7 +36,7 @@ docker-compose run app rails db:seed
 cp .env.example .env
 ```
 
-y añade la API Key para consumir la API de la SBIF en la variable `SBIF_KEY`
+y añade a este archivo la API Key para consumir la API de la SBIF en la variable `SBIF_KEY`
 
 ### Iniciar los servicios
 
@@ -45,8 +45,7 @@ docker-compose up
 ```
 
 ### TODO
-* TMC
-* Refactor Vista y Controllers
-* Estilos
+* Detalles en gráficos (leyendas, estilos, etc)
 * Persistencia de data, para evitar consultas constantes a API
+* Autenticación con User y Pass (para evitar usos no autorizados de la API)
 * Testing
