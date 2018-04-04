@@ -7,4 +7,8 @@ module MainHelper
 
 		[min, max, avg]
 	end
+
+  def tmc_stats tmcs
+    tmcs.map { |tmc| {name: tmc[:name], max: tmc[:data].map(&:last).max} }
+  end
 end

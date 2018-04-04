@@ -3,7 +3,7 @@
     <div class="col-md-12 text-center pt-md-5 mt-md-5 card">
       <div class="card-body">
       <strong>Seleccione un rango de fechas para realizar la consulta</strong>
-      <%= form_for :date_range, url: draw_report_path, method: :get do |f| %>
+      <%= form_for :date_range, url: reports_path, method: :get do |f| %>
         <%= f.text_field :starts_at, class: "datepicker" %>
         <%= f.text_field :ends_at, class: "datepicker" %>
         <%= f.submit t(:submit), class: "btn btn-primary"  %>

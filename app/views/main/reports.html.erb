@@ -35,6 +35,36 @@
       </div>
     </div>
   </div>
+
+  <div class="row my-md-5 card">
+    <div class="col-md-12 card-body">
+      <h4> TMCs</h4>
+      <%= line_chart @tmcs, thousands: ".", decimal: ",", legend: "TMCs" %>
+      <% stats = tmc_stats(@tmcs) %>
+      <div class="col-md-12 my-md-5 card">
+        <div class="text-left"></div>
+        <strong>Tasa Máxima para cada tipo de préstamo en el periodo:</strong>
+        <ul class="list-group">
+          <% stats.each do |tmc_info| %>
+            <li class="list-group-item">
+              <div class="row">
+                <div class="col-md-11">
+                <small><%= tmc_info[:name] %></small>:
+                </div>
+                <div class="col-md-1">
+                 <%= tmc_info[:max] %>%
+                </div>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+
+    </div>
+    <div class="col-md-12 text-center">
+
+    </div>
+  </div>
 </div>
 
 <div class="row">
