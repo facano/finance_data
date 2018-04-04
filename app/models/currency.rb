@@ -3,6 +3,20 @@ class Currency < ApplicationRecord
   default_scope -> { order(date: :asc) }
 
   class << self
+    def between date1, date2, currency, formated = false
+      case currency
+      when :dolar
+        data = Integration::SBIF::UF.between(date1, date2)
+      when :uf
+        data = Integration::SBIF::Dolar.between(date1, date2)
+      end
+      if data && formated
+        return format_data(data)
+      else
+        return data
+      end
+    end
+
     def set_until date, currency
       until_date = date
       last_currency = self.send(currency).last
@@ -18,7 +32,7 @@ class Currency < ApplicationRecord
           set_data(results, currency)
           return results
         end
-      else #empty db
+      else #Empty db
         case currency
         when :dolar
           results =  Integration::SBIF::Dolar.before_month(date)
@@ -42,6 +56,10 @@ class Currency < ApplicationRecord
           })
         end
       end
+    end
+
+    def format_data(data)
+       Hash[*data.map{ |data| [data["Fecha"], data["Valor"].gsub(".", "").gsub(",", ".").to_f] }.flatten]
     end
   end
 end
