@@ -1,4 +1,6 @@
 # Finance Data
+## Descripción
+Aplicación que prueba la conexión a la API de la SBIF http://api.sbif.cl/, preguntando por indicadores asociados a UF, Dolar y TCM para un período de tiempo arbitrario.
 
 ## Instalación
 
@@ -45,7 +47,6 @@ docker-compose up
 ```
 
 ### TODO
-* Detalles en gráficos (leyendas, estilos, etc)
 * Persistencia de data, para evitar consultas constantes a API
 * Autenticación con User y Pass (para evitar usos no autorizados de la API)
 * Mejorar usabilidad
