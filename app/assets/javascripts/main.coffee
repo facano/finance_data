@@ -2,6 +2,11 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
- $(document).ready ->
-    $('.datepicker').datepicker format: "dd/mm/yyyy",  autoclose: true
- 
+set_datepicker = ->
+  $('.datepicker').datepicker format: "dd/mm/yyyy",  autoclose: true
+
+$(document).ready ->
+	set_datepicker()
+
+$(document).on 'turbolinks:load', ->
+	set_datepicker()
