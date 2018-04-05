@@ -64,6 +64,13 @@ module Integration
           rescue Errno::ECONNREFUSED
             Rails.logger.error("Error trying to connect to the SBIF API")
             return nil
+          rescue RestClient::NotFound
+            Rails.logger.error("Contents not found in SBIF API")
+            return nil
+          rescue Excepcion => e
+            Rails.logger.error("Something wrong happens")
+            Rails.logger.error(e)
+            return nil
           end
         end
       end
