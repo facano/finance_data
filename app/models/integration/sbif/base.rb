@@ -52,26 +52,24 @@ module Integration
         private
 
         def resource(url_resource)
-          begin
-            result = RestClient.get "#{API_BASE_URL}/#{url_resource}?apikey=#{API_KEY}&formato=json"
-            if result.code == 200
-              json_result = JSON.parse(result.body)
-              return json_result[resource_key_result]
-            else
-              raise ArgumentError, 'Invalid response'
-              return nil
-           end
-          rescue Errno::ECONNREFUSED
-            Rails.logger.error("Error trying to connect to the SBIF API")
+          result = RestClient.get "#{API_BASE_URL}/#{url_resource}?apikey=#{API_KEY}&formato=json"
+          if result.code == 200
+            json_result = JSON.parse(result.body)
+            return json_result[resource_key_result]
+          else
+            raise ArgumentError, 'Invalid response'
             return nil
-          rescue RestClient::NotFound
-            Rails.logger.error("Contents not found in SBIF API")
-            return nil
-          rescue Excepcion => e
-            Rails.logger.error("Something wrong happens")
-            Rails.logger.error(e)
-            return nil
-          end
+         end
+        rescue Errno::ECONNREFUSED
+          Rails.logger.error('Error trying to connect to the SBIF API')
+          return nil
+        rescue RestClient::NotFound
+          Rails.logger.error('Contents not found in SBIF API')
+          return nil
+        rescue Excepcion => e
+          Rails.logger.error('Something wrong happens')
+          Rails.logger.error(e)
+          return nil
         end
       end
     end

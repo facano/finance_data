@@ -7,14 +7,12 @@ class MainController < ApplicationController
       @ends_at = params[:date_range][:ends_at].to_time
 
       # Manage special conditions
-      if @starts_at > @ends_at
-        @starts_at, @ends_at = @ends_at, @starts_at
-      end
+      @starts_at, @ends_at = @ends_at, @starts_at if @starts_at > @ends_at
       if @starts_at == @ends_at
-        flash[:alert] = "Las fechas no pueden ser iguales!"
+        flash[:alert] = 'Las fechas no pueden ser iguales!'
         redirect_to(root_path) && return
       elsif @ends_at > Time.zone.now
-        flash[:alert] = "Las fechas no pueden ser en el futuro!"
+        flash[:alert] = 'Las fechas no pueden ser en el futuro!'
         redirect_to(root_path) && return
       end
 
@@ -28,7 +26,7 @@ class MainController < ApplicationController
 
       @points = (@ends_at - @starts_at) / 1.day <= 40
     else
-      flash[:alert] = "Rellene todos los datos antes de continuar!"
+      flash[:alert] = 'Rellene todos los datos antes de continuar!'
       redirect_to(root_path) && return
     end
   end
