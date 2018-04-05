@@ -7,14 +7,14 @@
 <div class="row my-md-5 card">
   <div class="col-md-12 card-body">
     <h4>UF</h4>
-    <%= area_chart @ufs, thousands: ".", decimal: ",", legend: "UF", points: @points, ytitle: "CLP" %>
+    <%= area_chart @ufs, thousands: ".", decimal: ",", points: @points, xtitle: "Período", ytitle: "CLP",  prefix: "$" %>
     <% min, max, avg = data_statistic(@ufs) %>
   </div>
   <div class="col-md-12 text-center">
     <div class="card-body">
-      Mínimo: <%=  number_with_delimiter(min, delimiter: ".", separator: "," )  %> |
-      Máximo:  <%=  number_with_delimiter(max, delimiter: ".", separator: "," ) %> |
-      Media: <%=  number_with_delimiter('%.2f' % avg, delimiter: ".", separator: ",", precision: 2 ) %>
+      Mínimo: $<%=  number_with_delimiter(min, delimiter: ".", separator: "," )  %> |
+      Máximo:  $<%=  number_with_delimiter(max, delimiter: ".", separator: "," ) %> |
+      Media: $<%=  number_with_delimiter('%.2f' % avg, delimiter: ".", separator: ",", precision: 2 ) %>
     </div>
   </div>
 </div>
@@ -22,14 +22,14 @@
 <div class="row my-md-5 card">
   <div class="col-md-12 card-body">
     <h4> Dolar</h4>
-    <%= area_chart @dolares, thousands: ".", decimal: ",", legend: "Dolares", points: @points, ytitle: "CLP" %>
+    <%= area_chart @dolares, thousands: ".", decimal: ",", points: @points, xtitle: "Período", ytitle: "CLP",  prefix: "$" %>
     <% min, max, avg = data_statistic(@dolares) %>
   </div>
   <div class="col-md-12 text-center">
     <div class="card-body">
-      Mínimo: <%=  number_with_delimiter(min, delimiter: ".", separator: "," )  %> |
-      Máximo:  <%=  number_with_delimiter(max, delimiter: ".", separator: "," ) %> |
-      Media: <%=  number_with_delimiter('%.2f' % avg, delimiter: ".", separator: ",", precision: 2 ) %>
+      Mínimo: $<%=  number_with_delimiter(min, delimiter: ".", separator: "," )  %> |
+      Máximo:  $<%=  number_with_delimiter(max, delimiter: ".", separator: "," ) %> |
+      Media: $<%=  number_with_delimiter('%.2f' % avg, delimiter: ".", separator: ",", precision: 2 ) %>
     </div>
   </div>
 </div>
@@ -37,7 +37,7 @@
 <div class="row my-md-5 card">
   <div class="col-md-12 card-body">
     <h4> TMCs</h4>
-    <%= line_chart @tmcs, thousands: ".", decimal: ",", legend: "TMCs", ytitle: "%" %>
+    <%= line_chart @tmcs, thousands: ".", decimal: ",", legend: "TMCs", xtitle: "Período", ytitle: "Tasa", suffix: "%" %>
     <% stats = tmc_stats(@tmcs) %>
     <div class="col-md-12 my-md-5 card">
       <div class="text-left"></div>
@@ -47,7 +47,7 @@
           <li class="list-group-item">
             <div class="row">
               <div class="col-md-11">
-              <small><%= tmc_info[:name] %></small>:
+              <small><%= tmc_info[:name] %></small>
               </div>
               <div class="col-md-1">
                <%= tmc_info[:max] %>%
@@ -57,14 +57,10 @@
         <% end %>
       </ul>
     </div>
-
-  </div>
-  <div class="col-md-12 text-center">
-
   </div>
 </div>
 
-<div class="row">
+<div class="row my-md-5">
   <div class="col-md-12 text-center">
     <%= link_to t(:back), root_path, class: "btn btn-success" %>
   </div>

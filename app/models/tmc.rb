@@ -15,7 +15,7 @@ class TMC < ApplicationRecord
       formated_data = {}
       data.each do |d|
         formated_data[d['Tipo']] ||= {}
-        formated_data[d['Tipo']][:label] ||= "#{d['Titulo']} - #{d['SubTitulo']}"
+        formated_data[d['Tipo']][:label] ||= [d['Titulo'].presence, d['SubTitulo'].presence].join(" - ")
         formated_data[d['Tipo']][:data] ||= []
         formated_data[d['Tipo']][:data] <<  [d['Fecha'], d['Valor']]
       end

@@ -15,6 +15,11 @@ class MainController < ApplicationController
       @ufs = Currency.between(@starts_at, @ends_at, :uf, true)
       @dolares = Currency.between(@starts_at, @ends_at, :dolar, true)
       @tmcs = TMC.between(@starts_at, @ends_at, true)
+
+      if @ufs.nil? && @dolares.nil? && @tmcs.nil?
+        render file: "#{Rails.root}/public/404", status: :not_found && return
+      end
+
       @points = (@ends_at - @starts_at) / 1.day <= 40
     else
       redirect_to(root_path) && return

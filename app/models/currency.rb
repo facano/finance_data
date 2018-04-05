@@ -8,9 +8,9 @@ class Currency < ApplicationRecord
     def between(date1, date2, currency, formated = false)
       case currency
       when :dolar
-        data = Integration::SBIF::UF.between(date1, date2)
-      when :uf
         data = Integration::SBIF::Dolar.between(date1, date2)
+      when :uf
+        data = Integration::SBIF::UF.between(date1, date2)
       end
       if data && formated
         return format_data(data)
